@@ -5,6 +5,9 @@ from Yukki import db_mem
 
 
 def url_markup(videoid, duration, user_id, query, query_type):
+      if videoid not in db_mem:
+        db_mem[videoid] = {}
+    db_mem[videoid]["check"] = 1
     buttons = [
         [
             InlineKeyboardButton(
@@ -23,7 +26,12 @@ def url_markup(videoid, duration, user_id, query, query_type):
             InlineKeyboardButton(
                 text="🔗 More Menu", callback_data=f"other {videoid}|{user_id}"
             ),
-            
+              [
+            InlineKeyboardButton(
+                text="🔎 Search Lyrics",
+                callback_data=f"lyrics {videoid}|{user_id}",
+            )
+        ],
         ],
             InlineKeyboardButton(
                 text="❯",
@@ -62,6 +70,12 @@ def url_markup2(videoid, duration, user_id):
                 text="🔗 More Menu", callback_data=f"other {videoid}|{user_id}"
             ),
             
+        ], 
+      [
+            InlineKeyboardButton(
+                text="🔎 Search Lyrics",
+                callback_data=f"lyrics {videoid}|{user_id}",
+            )
         ],
         [
             InlineKeyboardButton(
